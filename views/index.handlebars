@@ -1,32 +1,56 @@
-<DOCTYPE! html>
+<h1>Bob's Burgers... like the show... get it?</h1>
 
-
-<h1>Burger</h1>
+<h2>Burgers Available</h2>
 
 <ul>
-  {{#each burger}}
-    <li>
-      <p>
-        {{this.id}}. {{this.burger}}
+  {{#each burgers}}
+    {{#unless this.devoured}}
+      <li>
+        {{this.name}}
 
-        <form action="/{{this.id}}?_method=DELETE" method="POST">
-          <input type="hidden" name="id" value="{{this.id}}">
-          <button type="submit">Devore Burger</button>
-        </form>
-      </p>
-    </li>
+        <form action="/{{this.id}}?_method=PUT" method="POST">
+          <input type="hidden" name="devoured" value="true">
+          <button type="submit">EAT ME!</button>
+        </form> 
+
+        {{> burgers/delete-burgers}}
+      </li>
+    {{/unless}}
   {{/each}}
 </ul>
 
-<h2>Create a Burger</h2>
-<form method="POST" action="/" class="button-size">
-	<textarea type="text" name="movie"></textarea>
-	<button type="submit">Save burger!</button>
-</form>
+<h2>Burgers gone!</h2>
 
-<h2>Update</h2>
-<form action="/?_method=PUT" method="POST" class="button-size">
-  <input type="text" name="id" placeholder="id">
-	<textarea type="text" name="plan" placeholder="plan"></textarea>
-	<button type="submit">Update burger!</button>
+<ul>
+  {{#each burgers}}
+    {{#if this.devoured}}
+      <li>
+        {{this.name}}
+
+        <form action="/{{this.id}}?_method=PUT" method="POST">
+          <input type="hidden" name="devoured" value="false">
+          <button type="submit">I ate too much!</button>
+        </form>
+
+        {{> burgers/delete-burgers}}
+      </li>
+    {{/if}}
+  {{/each}}
+</ul>
+
+<h2>Build a Burger Biotch!</h2>
+<form class="create-update-form" action="/" method="POST">
+
+  <div class="form-group">
+    <label for="bu">Burger Name:</label>
+    <input type="text" id="ca" name="name">
+  </div>
+
+  <div class="form-group">
+    <label for="devo">Devoured?</label><br>
+    <input type="radio" name="devoured" value="1" checked>Eat Me!<br>
+    <input type="radio" name="devoured" value="0"> 
+  </div>
+
+  <button type="submit">Add Burger</button>
 </form>
