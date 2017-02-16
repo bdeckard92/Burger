@@ -1,0 +1,29 @@
+<h1>Burger</h1>
+
+<ul>
+  {{#each burger}}
+    <li>
+      <p>
+        {{this.id}}. {{this.burger}}
+
+        <!--<form action="/{{this.id}}?_method=DELETE" method="POST"> this will delete from database. Need one that will just take it off html
+          <input type="hidden" name="id" value="{{this.id}}">
+          <button type="submit">Devour Burger</button>
+        </form>
+      </p>
+    </li>
+  {{/each}}
+</ul>-->
+
+<h2>Create a Burger</h2>
+<form method="POST" action="/" class="button-size">
+	<textarea type="text" name="movie"></textarea>
+	<button type="submit">Save burger!</button>
+</form>
+
+<h2>Update</h2>
+<form action="/?_method=PUT" method="POST" class="button-size">
+  <input type="text" name="id" placeholder="id">
+	<textarea type="text" name="plan" placeholder="plan"></textarea>
+	<button type="submit">Update burger!</button>
+</form>

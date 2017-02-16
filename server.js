@@ -1,22 +1,26 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var methodOverride = require("method-override");
+var mysql = require("mysql");
+
+var exphbs = require("express-handlebars");
+
 
 var app = express();
 var port = 3000;
 
-// Serve static content for the app from the "public" directory in the application directory.
+
 app.use(express.static(__dirname + "/public"));
 
-// Parse application/x-www-form-urlencoded
+
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Override with POST having ?_method=DELETE
+
 app.use(methodOverride("_method"));
 
 var exphbs = require("express-handlebars");
 
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));//left over from movie schedulre chage to view and index?
 app.set("view engine", "handlebars");
 
 var mysql = require("mysql");
@@ -50,7 +54,7 @@ app.get("/", function(req, res) {
 });
 
 app.post("/", function(req, res) {
-  connection.query("INSERT INTO burgers (burger) VALUES (?)", [req.body.plan], function(err, result) {
+  connection.query("INSERT INTO burgers (burger) VALUES (?)", [req.body], function(err, result) {
     if (err) {
       throw err;
     }
