@@ -22,7 +22,8 @@ var burger = {
     orm.delete("burgers", condition, function(res) {
       cb(res);
     });
-  }
+  } 
+
 };
 
 

@@ -8,18 +8,18 @@ var burger = require("../models/burger.js");
 
 
 router.get("/", function(req, res) {
-    res.redirect("/burgers");
+   res.redirect("/burger");
 });
 
-router.get("/burgers", function(req, res) {
+router.get("/burger", function(req, res) {
     burger.all(function(data) {
-        res.render("index", { burger_data: burgerData })
+        res.render("index", { burger_data: data })
 
     });
 });
 
 router.post("/burgers/create", function(req, res) {
-    burger.create(res, body.burger_name, function(result) {
+    burger.create(req.body.burger_name, function(result) {
         console.log(result);
         res.redirect("/");
     });
